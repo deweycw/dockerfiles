@@ -9,7 +9,7 @@ RUN wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh && \
 
 RUN git clone https://github.com/deweycw/CoreMS.git
 WORKDIR /CoreMS
-RUN git checkout main
+RUN git checkout mmac_docker
 
 RUN python -m pip install -U pip
 RUN python -m pip install wheel
