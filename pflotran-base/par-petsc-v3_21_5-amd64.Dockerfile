@@ -17,12 +17,9 @@ ENV LD_LIBRARY_PATH="/usr/lib"
 
 RUN git clone https://gitlab.com/petsc/petsc.git petsc
 WORKDIR /petsc
-RUN git checkout v3.20.2
-RUN ./configure --CFLAGS='-O3' --CXXFLAGS='-O3' --FFLAGS='-O3' --with-debugging=no --with-hdf5-dir=/usr/lib/aarch64-linux-gnu/hdf5/openmpi --with-hdf5-fortran-bindings=1 --download-metis=yes --download-parmetis=yes --download-fblaslapack=1
-RUN make PETSC_DIR=/petsc PETSC_ARCH=arch-linux-c-opt all
+RUN git checkout v3.21.5
+RUN ./configure --CFLAGS='-O3' --CXXFLAGS='-O3' --FFLAGS='-O3' --with-debugging=no --with-hdf5-dir=/usr/lib/x86_64-linux-gnu/hdf5/openmpi --with-hdf5-fortran-bindings=1 --download-metis=yes --download-parmetis=yes --download-fblaslapack=1
+RUN make all
 ENV PETSC_DIR='/petsc'
 ENV PETSC_ARCH='arch-linux-c-opt'
 WORKDIR /
-
-RUN mkdir pflotran
-WORKDIR /pflotran
