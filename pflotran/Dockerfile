@@ -5,6 +5,21 @@ RUN apt install wget -y
 RUN apt install python3 -y
 RUN apt install gcc -y
 RUN apt-get install gfortran -y
+
+
+ENV OMPI_DIR=/opt/ompi
+RUN mkdir -p /opt
+
+RUN wget -O openmpi-4.1.6.tar.bz2 "https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.6.tar.gz"
+RUN tar -xjf openmpi-4.1.6.tar.bz2
+WORKDIR openmpi-4.1.6 && ./configure && make install
+ENV PATH=$OMPI_DIR/bin:$PATH
+ENV LD_LIBRARY_PATH=$OMPI_DIR/lib:$LD_LIBRARY_PATH
+ENV MANPATH=$OMPI_DIR/share/man:$MANPATH
+
+
+
+
 RUN apt-get install openmpi-bin openmpi-common libopenmpi-dev libgtk2.0-dev -y
 RUN apt install libhdf5-mpi-dev -y
 RUN apt-get install make -y
